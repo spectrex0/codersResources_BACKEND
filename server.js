@@ -1,7 +1,7 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const cors = require('cors');
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -42,7 +42,7 @@ app.post('/getFeedbacks', (req, res) => {
   }
 });
 
-app.get('/feedbacks', (req, res) => {
+app.get('/feedbacks', (_, res) => {
   try {
     const feedbacks = JSON.parse(fs.readFileSync(dataDir, 'utf-8'));
     res.status(200).json(feedbacks);
@@ -58,14 +58,13 @@ app.listen(PORT, () => {
 
 // Middleware para manejar errores
 
-app.use((err, req, res, next) => {
+app.use((err, _, res, __) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
 
 
 
-app.use((req, res, next) => {
-  res.status(404).send(express.static(path.join(__filename, 'public/404.html')));
-  next();
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
