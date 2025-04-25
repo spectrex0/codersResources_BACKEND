@@ -8,12 +8,10 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware para parsear JSON y habilitar CORS
 app.use(express.json());
-app.use(cors({
-  origin: ['https://codersresources.vercel.app', 'http://localhost:3000', 'http://localhost:3001', 'https://codersresources.com'],
-}));
+app.use(cors());
 
 // Ruta para guardar comentarios
-const dataDir = path.join(__dirname, './data', 'feedbacks.json');
+const dataDir = path.join(__dirname, '/data', 'feedbacks.json');
 
 if (!fs.existsSync(dataDir)) {
   fs.writeFileSync(dataDir, JSON.stringify([]));
@@ -21,7 +19,7 @@ if (!fs.existsSync(dataDir)) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/feedbacks', (req, res) => {
+app.post('/getFeedbacks', (req, res) => {
   const { userName, comment } = req.body;
 
   if (!comment) {
