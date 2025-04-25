@@ -19,7 +19,7 @@ if (!fs.existsSync(dataDir)) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/getFeedbacks', (req, res) => {
+app.post('/feedbacks', (req, res) => {
   const { userName, comment } = req.body;
 
   if (!comment) {
