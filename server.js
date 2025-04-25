@@ -6,11 +6,9 @@ import cors from 'cors';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware para parsear JSON y habilitar CORS
 app.use(express.json());
 app.use(cors());
 
-// Ruta para guardar comentarios
 const dataDir = path.join(__dirname, '/data', 'feedbacks.json');
 
 if (!fs.existsSync(dataDir)) {
@@ -56,7 +54,6 @@ app.listen(PORT, () => {
   console.log(`Backend launched`);
 });
 
-// Middleware para manejar errores
 
 app.use((err, _, res, __) => {
   console.error(err.stack);
