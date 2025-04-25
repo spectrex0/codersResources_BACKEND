@@ -53,7 +53,7 @@ app.get('/feedbacks', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Backend launched on http://localhost:${PORT}`);
+  console.log(`Backend launched`);
 });
 
 // Middleware para manejar errores
