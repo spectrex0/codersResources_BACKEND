@@ -118,7 +118,6 @@ app.get("/users/:name", (req, res) => {
 });
 
 
-// Error handlers
 app.use((err, _, res, __) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
