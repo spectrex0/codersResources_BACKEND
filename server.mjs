@@ -99,6 +99,24 @@ app.post("/users", (req, res) => {
     res.status(500).json({ error: "Failed to register user." });
   }
 });
+app.get("/users/:name", (req, res) => {
+  const { name } = req.params;
+
+  try {
+    const users = JSON.parse(fs.readFileSync(usersFile, "utf-8"));
+    const userExists = users.some((user) => user.name === name);
+
+    if (userExists) {
+      res.status(200).json({ message: "User exists.", exists: true });
+    } else {
+      res.status(404).json({ message: "User not found.", exists: false });
+    }
+  } catch (error) {
+    console.error("Error checking user:", error.message);
+    res.status(500).json({ error: "Failed to check user." });
+  }
+});
+
 
 // Error handlers
 app.use((err, _, res, __) => {
@@ -111,5 +129,5 @@ app.use((_, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Backend launched on port ${PORT}`);
+  console.log(`Backend is running ma boy!`);
 });
