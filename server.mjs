@@ -120,7 +120,7 @@ app.get("/users/:name", (req, res) => {
 
 app.use((err, _, res, __) => {
   console.error(err.stack);
-  res.status(500).send("Something is broke!");
+  res.status(500).send("Something is broke...");
 });
 
 app.use((_, res) => {
