@@ -3,17 +3,19 @@ import express from "express";
 import path from "path";
 import mongoose from 'mongoose'
 import { fileURLToPath } from "url";
-const mongoURL = 'mongodb://localhost:27017/'
-
 import userModel from "./models/userModel.js";
 import feedbackModel from './models/feedbackModel.js'
-
+const dbPass = 'codersresources'
+const dbName = `tokyo`
+// Conexión a MongoDB usando Mongoose
+// const mongoURL = 'mongodb+srv://spectre:jZdjJaEAwRoTNMPW@cluster0.5crdf.mongodb.net/codersResources?retryWrites=true&w=majority&appName=Cluster0';
+const mongoURL = `mongodb+srv://${dbName}:${dbPass}@cluster0.5crdf.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 mongoose.connect(mongoURL)
   .then(() => {
-    console.log('Connected to DB');
+    console.log('Connected to MongoDB via Mongoose');
   })
   .catch((err) => {
-    console.error('Error connecting to DB:', err);
+    console.error('Error connecting to MongoDB:', err);
   });
 
 const __filename = fileURLToPath(import.meta.url);
@@ -64,7 +66,7 @@ app.post('/createUser', async (req, res) => {
     const existingUser = await userModel.findOne({ name });
     if (existingUser) {
       return res.status(400).json({ error: "User already exists" });
-      
+
     }
 
     const newUser = new userModel({ name, token });
@@ -77,14 +79,15 @@ app.post('/createUser', async (req, res) => {
 })
 
 
-app.get('/feedbacks', async (req, res) => {
+app.get('/feedbacks', async (_, res) => {
   try {
-  const feedbacks = await feedbackModel.find({})
-  res.json(feedbacks)
+    const feedbacks = await feedbackModel.find({});
+    res.json(feedbacks);
   } catch (error) {
-    console.log('Something went wrong while getting the comments: ' + error)
+    console.error('Something went wrong while getting the comments:', error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-})
+});
 
 app.post('/createFeedbacks', async (req, res) => {
   try {
