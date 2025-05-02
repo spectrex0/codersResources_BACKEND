@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import { fileURLToPath } from "url";
 import userModel from "./models/userModel.js";
 import feedbackModel from './models/feedbackModel.js'
+import feedback from "./schema/feedbacks.js";
 const dbPass = 'codersresources'
 const dbName = `tokyo`
 // Conexión a MongoDB usando Mongoose
@@ -48,10 +49,9 @@ app.get('/getUsers/:name', async (req, res) => {
   }
 })
 
-app.get('/getUsers', async (req, res) => {
+app.get('/getUsers', async (req, res) => {  
   try {
-    const {name} = req.body;
-    const users = await userModel.find({name});
+    const users = await userModel.find({}, 'name token');
     res.json(users);
   } catch (error) {
     console.error(error);
@@ -81,7 +81,7 @@ app.post('/createUser', async (req, res) => {
 
 app.get('/feedbacks', async (_, res) => {
   try {
-    const feedbacks = await feedbackModel.find({});
+    const feedbacks = await feedbackModel.find({}, 'name feedback');
     res.json(feedbacks);
   } catch (error) {
     console.error('Something went wrong while getting the comments:', error);
@@ -100,6 +100,7 @@ app.post('/createFeedbacks', async (req, res) => {
     console.warn('PLEASE REPORT TO (Tokyo) sprr_z on discord')
   }
 })
+
 
 app.listen(PORT, () => {
   console.log(`Backend is running ma boy!`);
