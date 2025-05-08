@@ -10,7 +10,11 @@
      document.addEventListener('DOMContentLoaded', () => {
         const  GetUser = async () => {
         try {
-            const getList = await fetch("https://codersresources-backend.onrender.com/createUser", {method: "GET", headers: {'Content-Type': "application/json"}});
+            const getList = await fetch("https://codersresources-backend.onrender.com/getUsers", 
+            {method: "GET",
+             headers: {'Access-Control-Allow-Origin': '*',
+             'Content-Type': "application/json"}
+            });
             const data = await getList.json();
             console.log(data);
         } catch (error) {
