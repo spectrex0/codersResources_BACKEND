@@ -26,11 +26,11 @@ router.post('/createFeedbacks', async (req, res) => {
   }
 });
 
-router.delete('/deleteFeedback', async (req, res) => {
+router.post('/deleteFeedback', async (req, res) => {
   try {
     const { id } = req.body;
     if (!id) {
-      return res.status(400).json({ error: "Feedback ID is required" });
+      return res.status(400).json({ error: "ID is required" });
     }
 
     const deletedFeedback = await feedbackModel.findByIdAndDelete(id);
