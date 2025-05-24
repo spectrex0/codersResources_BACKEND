@@ -1,24 +1,21 @@
 import { Elysia, t } from "elysia";
-import userModel from "../../models/userModel";
+import userModel from "../../models/userModel.js";
 
-const userDelete = new Elysia();
-
-userDelete.delete(
-  "/user/delete",
+export const userDeleteRoute = new Elysia().delete(
+  "/delete",
   async ({ body }) => {
     const { userName } = body;
     try {
       const userTodelete = await userModel.findOneAndDelete({ userName });
-      if(!userTodelete){
-        return{
-          message: "User not found ❌"
-        }
-      }else{
-        return{
-          message: "User removed ✔"
-        }
+      if (!userTodelete) {
+        return {
+          message: "User not found ❌",
+        };
+      } else {
+        return {
+          message: "User removed ✔",
+        };
       }
-      
     } catch (error) {
       return {
         message: "error deleting user... 😪",
@@ -31,6 +28,3 @@ userDelete.delete(
     }),
   }
 );
-
-
-export default userDelete

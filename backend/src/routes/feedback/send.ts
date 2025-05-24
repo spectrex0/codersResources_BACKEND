@@ -1,10 +1,8 @@
 import { Elysia, t } from "elysia";
-import feedbackModel from "../../models/feedbackModel";
+import feedbackModel from "../../models/feedbackModel.js";
 
-const FeedbackRouteSend = new Elysia();
-
-FeedbackRouteSend.post(
-  "/feedbacks/send",
+export const feedbackSendRoute = new Elysia().post(
+  "/send",
   async ({ body }) => {
     try {
       const { FeedbackAuthor, FeedbackContent } = body;
@@ -30,5 +28,3 @@ FeedbackRouteSend.post(
     }),
   }
 );
-
-export default FeedbackRouteSend;
