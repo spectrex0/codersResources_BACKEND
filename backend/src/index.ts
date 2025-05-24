@@ -23,9 +23,10 @@ app.use(cors());
 app.use(FeedbackR);
 app.use(userR);
 
-app.use(cors({
-  origin: ['https://codersresources.vercel.app'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+// app.use(cors({
+//   origin: ['https://codersresources.vercel.app'],
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+// }));
+app.use(cors())
 console.log(` Backend: ${app.server?.hostname}:${app.server?.port}`);
