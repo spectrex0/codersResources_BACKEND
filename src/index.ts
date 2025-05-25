@@ -1,6 +1,7 @@
 import { cors } from "@elysiajs/cors";
 import { node } from "@elysiajs/node";
 import { swagger } from "@elysiajs/swagger";
+import { error, log } from "console";
 import { Elysia } from "elysia";
 import mongoose from "mongoose";
 import { feedbackRoute } from "./routes/feedback/index.js";
@@ -12,13 +13,10 @@ const mongoURL = `mongodb+srv://${dbName}:${dbPass}@cluster0.qbhz83b.mongodb.net
 
 mongoose
   .connect(mongoURL)
-  .then(() => {
-    console.log("Connected to MongoDB via Mongoose");
-  })
-  .catch((err) => {
-    console.error("Error connecting to MongoDB:", err);
-  });
+  .then(() => log("Connected to MongoDB via Mongoose"))
+  .catch((err) => error("Error connecting to MongoDB:", err));
 
+// chain of .use order is IMPORTANT!
 new Elysia({ adapter: node() })
   .use(
     cors({
@@ -33,4 +31,4 @@ new Elysia({ adapter: node() })
   .use(userRoute)
   .listen(4200);
 
-console.log(`Backend: http://localhost:4200`);
+log(`Backend: http://localhost:4200`);
