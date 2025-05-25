@@ -3,7 +3,7 @@ import feedbackModel from "../../models/feedbackModel.js";
 
 export const feedbackSendRoute = new Elysia().post(
   "/send",
-  async ({ body }) => {
+  async ({ body }: {body: {FeedbackAuthor: String, FeedbackContent: String}}) => {
     try {
       const { FeedbackAuthor, FeedbackContent } = body;
 

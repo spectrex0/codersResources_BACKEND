@@ -3,7 +3,7 @@ import userModel from "../../models/userModel.js";
 
 export const userRegisterRoute = new Elysia().post(
   "/register",
-  async ({ body }) => {
+  async ({ body }: {body:{userPassword: String,userName: String }}) => {
     const { userName, userPassword } = body;
     try {
       if (!userName || !userPassword) {

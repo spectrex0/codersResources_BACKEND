@@ -3,7 +3,7 @@ import userModel from "../../models/userModel.js";
 
 export const userLoginRoute = new Elysia().post(
   "/login",
-  async ({ body }) => {
+  async ({ body }: { body: { userName: string; userPassword: string } }) => {
     const { userName, userPassword } = body;
     const UserFound = await userModel.findOne({ userName });
     const passFound = await userModel.findOne({ userPassword });

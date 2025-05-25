@@ -3,7 +3,7 @@ import userModel from "../../models/userModel.js";
 
 export const userDeleteRoute = new Elysia().delete(
   "/delete",
-  async ({ body }) => {
+  async ({ body }: {body: {userName: String}}) => {
     const { userName } = body;
     try {
       const userTodelete = await userModel.findOneAndDelete({ userName });
