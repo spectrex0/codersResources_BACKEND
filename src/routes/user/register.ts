@@ -16,7 +16,7 @@ export const userRegisterRoute = new Elysia().post(
       if (userExists) {
         return {
           successful: false,
-          message: "The user already axists, please add the passwrord for ", userName,
+          message: "The user already axists",
         };
       }
       const RegistUser = await new userModel({ userName, userPassword });
