@@ -20,7 +20,7 @@ mongoose
 new Elysia({ adapter: node() })
   .use(
     cors({
-      origin: ["https://codersresources.vercel.app","http://localhost"],
+      origin: ["https://codersresources.vercel.app","http://localhost:3000"],
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     })

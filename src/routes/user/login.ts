@@ -6,22 +6,21 @@ export const userLoginRoute = new Elysia().post(
   async ({ body }: { body: { userName: string; userPassword: string } }) => {
     const { userName, userPassword } = body;
     const UserFound = await userModel.findOne({ userName });
-    const passFound = await userModel.findOne({ userPassword });
 
     if (!UserFound) {
       return {
-        succesful: false,
+        successful: false,
         message: "User not found 😶",
       };
     }
-    if (!UserFound || !passFound) {
+    if (UserFound.userPassword !== userPassword) {
       return {
-        succesful: false,
-        message: "Invalid credentails dude 🤐",
+        successful: false,
+        message: "Invalid credentials dude 🤐",
       };
     } else {
       return {
-        succesful: true,
+        successful: true,
       };
     }
   },
