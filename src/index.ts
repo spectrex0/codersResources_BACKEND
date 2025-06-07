@@ -18,13 +18,14 @@ mongoose
 
 // chain of .use order is IMPORTANT!
 new Elysia({ adapter: node() })
-  .use(
-    cors({
-      origin: ["https://codersresources.vercel.app","http://localhost:3000"],
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true,
-    })
-  )
+  // .use(
+  //   cors({
+  //     origin: ["https://codersresources.vercel.app"],
+  //     methods: ["GET", "POST", "PUT", "DELETE"],
+  //     credentials: true,
+  //   })
+  // )
+  .use(cors())
   .use(swagger())
   .get("/", () => "Welcome to Coders Resources Backend")
   .use(feedbackRoute)

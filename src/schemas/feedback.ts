@@ -9,6 +9,14 @@ const FeedbackSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  Likes: {
+    type: Number,
+    required: true
+  },
+  Reports: {
+    type: Number,
+    required: true
+  }
 })
 
 export default FeedbackSchema

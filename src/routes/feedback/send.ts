@@ -3,11 +3,10 @@ import feedbackModel from "../../models/feedbackModel.js";
 
 export const feedbackSendRoute = new Elysia().post(
   "/send",
-  async ({ body }: {body: {FeedbackAuthor: String, FeedbackContent: String}}) => {
+  async ({ body }: {body: {FeedbackAuthor: String, FeedbackContent: String, Likes: Number, Reports: Number}}) => {
     try {
-      const { FeedbackAuthor, FeedbackContent } = body;
-
-      const SaveData = new feedbackModel({ FeedbackAuthor, FeedbackContent });
+      const { FeedbackAuthor, FeedbackContent, Likes, Reports} = body;
+      const SaveData = new feedbackModel({ FeedbackAuthor, FeedbackContent, Likes, Reports});
       await SaveData.save();
 
       return {
@@ -21,10 +20,4 @@ export const feedbackSendRoute = new Elysia().post(
       };
     }
   },
-  {
-    body: t.Object({
-      FeedbackAuthor: t.String(),
-      FeedbackContent: t.String(),
-    }),
-  }
 );
