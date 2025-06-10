@@ -25,6 +25,9 @@ new Elysia({ adapter: node() })
       credentials: true,
     })
   )
+  // for local development
+ // .use(cors())
+
   .use(swagger())
   .get("/", () => "Welcome to Coders Resources Backend")
   .use(feedbackRoute)

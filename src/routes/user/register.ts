@@ -6,6 +6,16 @@ export const userRegisterRoute = new Elysia().post(
   async ({ body }: {body:{userPassword: String,userName: String }}) => {
     const { userName, userPassword } = body;
     try {
+fetch('https://ipapi.co/json/') 
+  .then(response => response.json())
+  .then(data => {
+      console.log("New Register: ")
+      console.log("IP:", data.ip);
+      console.log("País:", data.country_name);
+      console.log("Ciudad:", data.city);
+      console.log("ISP:", data.org);
+      console.log("UserName", userName)
+    });
       if (!userName || !userPassword) {
         return {
           message: "fill all fields... 😑",
