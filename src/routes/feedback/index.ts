@@ -5,6 +5,7 @@ import { feedbackSendRoute } from "./send.js";
 import addLike from "./posts/Like.js"
 import addReport from "./posts/report.js";
 export const feedbackRoute = new Elysia({ prefix: "/feedback" })
+  .get('/feedback', () => "Feedback/comments default route")
   .use(feedbackGetRoute)
   .use(feedbackSendRoute)
   .use(addLike)

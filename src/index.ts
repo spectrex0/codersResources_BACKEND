@@ -7,8 +7,8 @@ import mongoose from "mongoose";
 import { feedbackRoute } from "./routes/feedback/index.js";
 import { userRoute } from "./routes/user/index.js";
 
-const dbPass = "codersresources";
-const dbName = "tokyo";
+const dbPass = process.env.dbName;
+const dbName = process.env.dbPass;
 const mongoURL = `mongodb+srv://${dbName}:${dbPass}@cluster0.qbhz83b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose
@@ -16,11 +16,10 @@ mongoose
   .then(() => log("Connected to MongoDB via Mongoose"))
   .catch((err) => error("Error connecting to MongoDB:", err));
 
-// chain of .use order is IMPORTANT!
 new Elysia({ adapter: node() })
   .use(
     cors({
-      origin: ["https://codersresources.vercel.app"],
+      origin: ["https://codersresources.vercel.app", "https://isolated-emili-spectredev-9a803c60.koyeb.app/api/api"],
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     })
