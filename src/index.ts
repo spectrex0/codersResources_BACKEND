@@ -6,9 +6,11 @@ import { Elysia } from "elysia";
 import mongoose from "mongoose";
 import { feedbackRoute } from "./routes/feedback/index.js";
 import { userRoute } from "./routes/user/index.js";
-
-const dbPass = process.env.dbName;
-const dbName = process.env.dbPass;
+import dotenv from "dotenv";
+dotenv.config();
+const dbPass = process.env.dbPass;
+const dbName = process.env.dbName;
+console.log(dbName)
 const mongoURL = `mongodb+srv://${dbName}:${dbPass}@cluster0.qbhz83b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose
