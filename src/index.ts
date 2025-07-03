@@ -6,11 +6,11 @@ import { Elysia } from "elysia";
 import mongoose from "mongoose";
 import { feedbackRoute } from "./routes/feedback/index.js";
 import { userRoute } from "./routes/user/index.js";
+import { scrapper } from "./routes/theLux/scrapper.js";
 import dotenv from "dotenv";
 dotenv.config();
 const dbPass = process.env.dbPass;
 const dbName = process.env.dbName;
-console.log(dbName)
 const mongoURL = `mongodb+srv://${dbName}:${dbPass}@cluster0.qbhz83b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose
@@ -26,13 +26,13 @@ new Elysia({ adapter: node() })
       credentials: true,
     })
   )
-  // for local development
- // .use(cors())
+  //.use(cors())
 
   .use(swagger())
   .get("/", () => "Welcome to Coders Resources Backend")
   .use(feedbackRoute)
   .use(userRoute)
+  .use(scrapper)
   .listen(4200);
 
-log(`Backend: http://localhost:4200`);
+log(`[✔] Backend: http://localhost:4200`);
